@@ -1,107 +1,152 @@
-import type { Metadata } from "next";
+
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const siteConfig = {
+  name: "Toko Migineishvili",
+  title: "Toko Migineishvili | Full-Stack Developer",
+  description:
+    "Explore the portfolio of Toko Migineishvili, a Full-Stack Developer specializing in Next.js, React, TypeScript, Node.js, backend systems, DevOps, and modern web applications.",
+  url: "https://toko122.github.io/portfolio/",
+  image: "/me.png",
+  github: "https://github.com/Toko122",
+  locale: "en_US",
+};
+
 const geistSans = Geist({
-variable: "--font-geist-sans",
-subsets: ["latin"],
-display: "swap",
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-variable: "--font-geist-mono",
-subsets: ["latin"],
-display: "swap",
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
+const metadataBase = new URL(siteConfig.url);
+
 export const metadata: Metadata = {
-metadataBase: new URL("https://toko122.github.io/gfbs3-portfolio-demo/"),
+  metadataBase,
 
-title: {
-default: "Toko Migineishvili | Full-Stack Developer & DevOps",
-template: "%s | Toko Migineishvili",
-},
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
 
-description:
-"Toko Migineishvili — Full-Stack Developer, DevOps & Infrastructure specialist, and IT Technician. Explore my experience, skills, and projects.",
+  description: siteConfig.description,
 
-applicationName: "Toko Migineishvili Portfolio",
+  applicationName: `${siteConfig.name} Portfolio`,
 
-authors: [
-{
-name: "Toko Migineishvili",
-url: "https://github.com/Toko122",
-},
-],
+  authors: [
+    {
+      name: siteConfig.name,
+      url: siteConfig.github,
+    },
+  ],
 
-creator: "Toko Migineishvili",
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
 
-keywords: [
-"Toko Migineishvili",
-"Full-Stack Developer",
-"Next.js Developer",
-"React Developer",
-"TypeScript",
-"Node.js",
-"DevOps",
-"Infrastructure",
-"IT Specialist",
-"IT Technician",
-"Cybersecurity",
-"Developer Portfolio",
-],
+  keywords: [
+    "Toko Migineishvili",
+    "Toko Migineishvili Portfolio",
+    "Full-Stack Developer",
+    "Full-Stack Web Developer",
+    "Software Developer",
+    "Next.js Developer",
+    "React Developer",
+    "TypeScript Developer",
+    "JavaScript",
+    "Node.js",
+    "PostgreSQL",
+    "REST API",
+    "Backend Development",
+    "Frontend Development",
+    "DevOps",
+    "Linux",
+    "Web Application Development",
+    "Responsive Web Design",
+    "Batumi Georgia Developer",
+  ],
 
-alternates: {
-canonical: "./",
-},
+  category: "technology",
 
-openGraph: {
-type: "website",
-url: "https://toko122.github.io/gfbs3-portfolio-demo/",
-title: "Toko Migineishvili | Full-Stack Developer & DevOps",
-description:
-"Explore the portfolio, technical skills, experience, and projects of Toko Migineishvili.",
-siteName: "Toko Migineishvili Portfolio",
-images: [
-{
-url: "me.png",
-width: 1200,
-height: 630,
-alt: "Toko Migineishvili — Developer Portfolio",
-},
-],
-},
+  classification: "Developer Portfolio",
 
-twitter: {
-card: "summary_large_image",
-title: "Toko Migineishvili | Full-Stack Developer & DevOps",
-description:
-"Full-Stack Developer, DevOps & Infrastructure, and IT Specialist.",
-images: ["me.png"],
-},
+  referrer: "origin-when-cross-origin",
 
-robots: {
-index: true,
-follow: true,
-},
+  alternates: {
+    canonical: siteConfig.url,
+  },
 
-icons: {
-icon: "/favicon.ico",
-},
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: `${siteConfig.name} Portfolio`,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.image,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} — Full-Stack Developer Portfolio`,
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.image],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#050510",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
-children,
+  children,
 }: Readonly<{
-children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-return (
-<html lang="en" className="dark">
-<body
-className={`${geistSans.variable} ${geistMono.variable} antialiased`}
->
-{children}
-</body>
-</html>
-);
+  return (
+    <html lang="en" className="dark">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
 }
